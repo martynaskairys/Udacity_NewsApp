@@ -11,16 +11,16 @@ public class News {
     String author;
     String date;
     String section;
-    String thumbPic;
+//    String thumbPic;
 
 
-    public News(String url, String title, String author, String section, String date, String thumbnail) {
+    public News(String url, String title, String author, String section, String date) {
         this.url = url;
         this.title = title;
         this.author = author;
         this.section = section;
         this.date = date;
-        this.thumbPic = thumbnail;
+//        this.thumbPic = thumbnail;
 
     }
 
@@ -64,9 +64,9 @@ public class News {
         this.section = section;
     }
 
-    public String getThumbPic() {return thumbPic;}
-
-    public void setThumbPic(String thumbPic) {this.thumbPic = thumbPic;}
+//    public String getThumbPic() {return thumbPic;}
+//
+//    public void setThumbPic(String thumbPic) {this.thumbPic = thumbPic;}
 
 
     public String toString() {
@@ -76,7 +76,7 @@ public class News {
                 ", url='" + url + '\'' +
                 ", date='" + date + '\'' +
                 ", section='" + section + '\'' +
-                ", thumbnail='" + thumbPic + '\'' +
+//                ", thumbnail='" + thumbPic + '\'' +
                 '}';
     }
 }
