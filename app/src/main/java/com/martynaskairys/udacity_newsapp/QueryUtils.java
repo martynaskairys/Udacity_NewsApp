@@ -35,9 +35,11 @@ public class QueryUtils {
         builder.scheme("http")
                 .authority("content.guardianapis.com")
                 .appendPath("search")
-                .appendQueryParameter("show-fields", "thumbnail")
+                .appendQueryParameter("order-by", "newest")
+                .appendQueryParameter("show-references", "author")
+                .appendQueryParameter("show-tags", "contributor")
                 .appendQueryParameter("q", "query")
-                .appendQueryParameter("order-by", "newest");
+                .appendQueryParameter("api-key", "test");
         String url = builder.build().toString();
         return url;
     }
@@ -54,11 +56,11 @@ public class QueryUtils {
 
     private static String formatDate(String rawDate) {
         String jsonDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-        SimpleDateFormat jsonFormatter = new SimpleDateFormat(jsonDatePattern, Locale.US);
+        SimpleDateFormat jsonFormatter = new SimpleDateFormat(jsonDatePattern, Locale.ENGLISH);
         try {
             Date parsedJsonDate = jsonFormatter.parse(rawDate);
             String finalDatePattern = "MMM d, yyy";
-            SimpleDateFormat finalDateFormatter = new SimpleDateFormat(finalDatePattern, Locale.US);
+            SimpleDateFormat finalDateFormatter = new SimpleDateFormat(finalDatePattern, Locale.ENGLISH);
             return finalDateFormatter.format(parsedJsonDate);
         } catch (ParseException e) {
             Log.e("QueryUtils", "Error parsing JSON date: ", e);
@@ -70,7 +72,7 @@ public class QueryUtils {
 
         String jsonResponse = "";
 
-        if (url==null){
+        if (url == null) {
             return jsonResponse;
         }
 
@@ -129,9 +131,10 @@ public class QueryUtils {
                 JSONObject result = resultsArray.getJSONObject(i);
                 String url = result.getString("webUrl");
                 String title = result.getString("webTitle");
-                String date = result.getString("webPublicationDate");
-                date = formatDate(date);
                 String section = result.getString("sectionName");
+                String date = result.getString("webPublicationDate");
+                String thumbPic= result.getString("thumbnail");
+                date = formatDate(date);
                 JSONArray tagsArray = result.getJSONArray("tags");
                 String author = "";
                 if (tagsArray.length() == 0) {
@@ -142,7 +145,7 @@ public class QueryUtils {
                         author += firstObject.getString("webTitle") + ". ";
                     }
                 }
-                listOfNews.add(new News(url, title, date, section, author));
+                listOfNews.add(new News(url, title,  author, section, date, thumbPic));
             }
 
         } catch (JSONException e) {
