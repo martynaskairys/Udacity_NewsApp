@@ -28,6 +28,9 @@ import java.util.Locale;
 
 public class QueryUtils {
 
+    private static final String WRONG_URL_MESSAGE = "Wrong URL creation: ";
+    private static final String RESPONSE_ERROR = "Response code error: ";
+    private static final String NO_JSON_RESULTS = "Problem getting JSON results";
 
     static String createStringUrl() {
 
@@ -49,7 +52,7 @@ public class QueryUtils {
         try {
             return new URL(stringUrl);
         } catch (MalformedURLException e) {
-            Log.e("QueryUtils", "Wrong URL creation: ", e);
+            Log.e("QueryUtils", WRONG_URL_MESSAGE, e);
             return null;
         }
     }
@@ -90,10 +93,10 @@ public class QueryUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
-                Log.e("MainActivity", "Response code error: " + urlConnection.getResponseCode());
+                Log.e("MainActivity", RESPONSE_ERROR + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e("QueryUtils", "Problem getting JSON results", e);
+            Log.e("QueryUtils", NO_JSON_RESULTS, e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();

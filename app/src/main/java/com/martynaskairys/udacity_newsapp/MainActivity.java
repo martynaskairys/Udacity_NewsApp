@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static int LOAD_ID = 0;
     SwipeRefreshLayout swipe;
     ProgressDialog progDialog;
+    private static final String LOADING_MESSAGE = "Loading ... ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
 
-        progDialog.setMessage("Loading...");
+        progDialog.setMessage(LOADING_MESSAGE);
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(true);

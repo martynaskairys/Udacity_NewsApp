@@ -14,6 +14,9 @@ import java.util.List;
 
 public class LoaderNews extends AsyncTaskLoader<List<News>> {
 
+    private static final String ERROR_IN_BACKGROUND_LOADING = "Error loadInBackground";
+
+
     public LoaderNews(Context context) {
         super(context);
     }
@@ -34,7 +37,7 @@ public class LoaderNews extends AsyncTaskLoader<List<News>> {
             String jsonResponse = QueryUtils.makeHttpRequest(url);
             listOfNews = QueryUtils.parseJson(jsonResponse);
         } catch (IOException e) {
-            Log.e("Query", "Error loadInBackground", e);
+            Log.e("Query", ERROR_IN_BACKGROUND_LOADING, e);
         }
         return listOfNews;
     }
