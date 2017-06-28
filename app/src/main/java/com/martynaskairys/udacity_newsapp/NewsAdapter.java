@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class NewsAdapter extends ArrayAdapter<News> {
 
-//    private Context context;
+    private Context context;
 
     public NewsAdapter(Context context) {
         super(context, -1, new ArrayList<News>());
@@ -35,16 +35,15 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView author = (TextView) convertView.findViewById(R.id.author);
         TextView section = (TextView) convertView.findViewById(R.id.section);
         TextView date = (TextView) convertView.findViewById(R.id.date);
-//        ImageView image = (ImageView) convertView.findViewById(R.id.thumbPic);
+        ImageView image = (ImageView) convertView.findViewById(R.id.thumbnail);
 
         News ongoingNews = getItem(position);
         title.setText(ongoingNews.getTitle());
         author.setText(ongoingNews.getAuthor());
         section.setText(ongoingNews.getSection());
         date.setText(ongoingNews.getDate());
-//        image.setImageURI(Uri.parse(ongoingNews.getThumbPic()));
 
-//        Picasso.with(context).load(ongoingNews.getImageUrl()).into(holder.image);
+        Picasso.with(context).load(ongoingNews.getThumbnail()).into(image);
 
         return convertView;
 

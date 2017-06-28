@@ -136,7 +136,7 @@ public class QueryUtils {
                 String title = result.getString("webTitle");
                 String section = result.getString("sectionName");
                 String date = result.getString("webPublicationDate");
-//                String thumbPic= result.getString("thumbnail");
+                String thumbnail= result.getString("thumbnail");
                 date = formatDate(date);
                 JSONArray tagsArray = result.getJSONArray("tags");
                 String author = "";
@@ -148,7 +148,7 @@ public class QueryUtils {
                         author += firstObject.getString("webTitle") + ". ";
                     }
                 }
-                listOfNews.add(new News(url, title,  author, section, date));
+                listOfNews.add(new News(url, title, author, section, date, thumbnail));
             }
 
         } catch (JSONException e) {
