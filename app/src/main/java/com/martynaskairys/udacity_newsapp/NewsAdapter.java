@@ -1,7 +1,6 @@
 package com.martynaskairys.udacity_newsapp;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,8 @@ import java.util.ArrayList;
 
 public class NewsAdapter extends ArrayAdapter<News> {
 
-    private Context context;
-
     public NewsAdapter(Context context) {
         super(context, -1, new ArrayList<News>());
-//        context = getContext();
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -43,7 +39,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         section.setText(ongoingNews.getSection());
         date.setText(ongoingNews.getDate());
 
-        Picasso.with(context).load(ongoingNews.getThumbnail()).into(image);
+        Picasso.with(getContext()).load(ongoingNews.getThumbnail()).into(image);
 
         return convertView;
 

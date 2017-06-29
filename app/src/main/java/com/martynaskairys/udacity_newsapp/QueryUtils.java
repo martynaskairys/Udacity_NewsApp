@@ -41,6 +41,7 @@ public class QueryUtils {
                 .appendQueryParameter("order-by", "newest")
                 .appendQueryParameter("show-references", "author")
                 .appendQueryParameter("show-tags", "contributor")
+                .appendQueryParameter("show-fields", "thumbnail")
                 .appendQueryParameter("q", "query")
                 .appendQueryParameter("api-key", "test");
         String url = builder.build().toString();
@@ -136,7 +137,10 @@ public class QueryUtils {
                 String title = result.getString("webTitle");
                 String section = result.getString("sectionName");
                 String date = result.getString("webPublicationDate");
-                String thumbnail= result.getString("thumbnail");
+
+                JSONObject fields = result.getJSONObject("fields");
+                String thumbnail = fields.getString("thumbnail");
+
                 date = formatDate(date);
                 JSONArray tagsArray = result.getJSONArray("tags");
                 String author = "";
